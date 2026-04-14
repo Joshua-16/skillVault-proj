@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillVault – Unlock Your Tech Future</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #050a10;
+        --surface: #0b1623;
+        --surface2: #111e2e;
+        --accent: #00e5ff;
+        --accent2: #00ff9d;
+        --accent3: #7b61ff;
+        --text: #e8f4f8;
+        --muted: #6b8ea8;
+        --border: rgba(0, 229, 255, 0.12);
+        --glow: 0 0 40px rgba(0, 229, 255, 0.18);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ── BACKGROUND MESH ── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 70% 60% at 15% 20%,
+            rgba(0, 229, 255, 0.07) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 50% 50% at 85% 80%,
+            rgba(123, 97, 255, 0.07) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 40% at 60% 10%,
+            rgba(0, 255, 157, 0.05) 0%,
+            transparent 70%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        height: 70px;
+        background: rgba(5, 10, 16, 0.85);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+      .logo-icon {
+        width: 38px;
+        height: 38px;
+        position: relative;
+      }
+      .logo-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+      .logo-text {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1.25rem;
+        letter-spacing: 0.08em;
+        color: var(--text);
+      }
+      .logo-text span {
+        color: var(--accent);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        letter-spacing: 0.03em;
+        transition: color 0.25s;
+      }
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .nav-cta {
+        background: var(--accent);
+        color: var(--bg) !important;
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        transition:
+          box-shadow 0.25s,
+          background 0.25s !important;
+      }
+      .nav-cta:hover {
+        background: var(--accent2) !important;
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+        color: var(--bg) !important;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .hamburger span {
+        width: 24px;
+        height: 2px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 100px 5% 60px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.25);
+        border-radius: 100px;
+        padding: 6px 18px;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 2rem;
+        animation: fadeSlide 0.8s ease both;
+      }
+      .hero-badge::before {
+        content: "●";
+        font-size: 0.5rem;
+      }
+
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(2.8rem, 7vw, 5.5rem);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.5rem;
+        animation: fadeSlide 0.9s 0.1s ease both;
+      }
+      .hero h1 .line2 {
+        color: var(--accent);
+      }
+      .hero h1 .line3 {
+        color: var(--accent2);
+      }
+
+      .hero p {
+        max-width: 580px;
+        color: var(--muted);
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+        line-height: 1.75;
+        animation: fadeSlide 1s 0.2s ease both;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: fadeSlide 1s 0.3s ease both;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: var(--bg);
+        padding: 14px 36px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          box-shadow 0.3s;
+        letter-spacing: 0.03em;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 229, 255, 0.35);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--text);
+        padding: 14px 36px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          border-color 0.25s,
+          background 0.25s;
+      }
+      .btn-outline:hover {
+        border-color: var(--accent);
+        background: rgba(0, 229, 255, 0.06);
+      }
+
+      /* ── STATS BAR ── */
+      .stats-bar {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0;
+        margin: 0 5% 80px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .stat-item {
+        flex: 1;
+        min-width: 150px;
+        padding: 30px 20px;
+        text-align: center;
+        border-right: 1px solid var(--border);
+      }
+      .stat-item:last-child {
+        border-right: none;
+      }
+      .stat-num {
+        font-family: "Syne", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--accent);
+      }
+      .stat-label {
+        font-size: 0.8rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      /* ── SECTION ── */
+      section {
+        position: relative;
+        z-index: 1;
+        padding: 80px 5%;
+      }
+      .section-tag {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+      }
+      .section-title {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+      }
+      .section-sub {
+        color: var(--muted);
+        max-width: 520px;
+        line-height: 1.7;
+      }
+
+      /* ── SKILLS GRID ── */
+      .skills-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .skill-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.3s,
+          border-color 0.3s,
+          box-shadow 0.3s;
+        cursor: pointer;
+      }
+      .skill-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          var(--card-color, var(--accent)),
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .skill-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--card-color, var(--accent));
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      }
+      .skill-card:hover::before {
+        opacity: 0.05;
+      }
+
+      .skill-card[data-color="cyan"] {
+        --card-color: #00e5ff;
+      }
+      .skill-card[data-color="green"] {
+        --card-color: #00ff9d;
+      }
+      .skill-card[data-color="purple"] {
+        --card-color: #7b61ff;
+      }
+      .skill-card[data-color="orange"] {
+        --card-color: #ff8c42;
+      }
+      .skill-card[data-color="pink"] {
+        --card-color: #ff6eb4;
+      }
+
+      .skill-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .skill-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 4px 12px;
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .badge-code {
+        background: rgba(0, 229, 255, 0.1);
+        color: var(--accent);
+      }
+      .badge-nocode {
+        background: rgba(0, 255, 157, 0.1);
+        color: var(--accent2);
+      }
+
+      .skill-card h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+      }
+      .skill-card p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.65;
+        margin-bottom: 1.25rem;
+      }
+
+      .skill-meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.78rem;
+        color: var(--muted);
+        flex-wrap: wrap;
+      }
+      .skill-meta span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .skill-enroll {
+        margin-top: 1.5rem;
+        width: 100%;
+        padding: 11px;
+        border-radius: 8px;
+        border: 1px solid var(--card-color, var(--accent));
+        background: transparent;
+        color: var(--card-color, var(--accent));
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: "Syne", sans-serif;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition:
+          background 0.25s,
+          color 0.25s;
+      }
+      .skill-enroll:hover {
+        background: var(--card-color, var(--accent));
+        color: var(--bg);
+      }
+
+      /* ── HOW IT WORKS ── */
+      .how-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+      .how-step {
+        position: relative;
+        padding: 28px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+      .step-num {
+        font-family: "Syne", sans-serif;
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: rgba(0, 229, 255, 0.08);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+      .how-step h4 {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .how-step p {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* ── REGISTER SECTION ── */
+      #register {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .register-inner {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .form-title-row {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      /* Skill Tabs */
+      .skill-tabs {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+        justify-content: center;
+      }
+      .skill-tab {
+        padding: 8px 18px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-family: "DM Sans", sans-serif;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+      .skill-tab.active,
+      .skill-tab:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: rgba(0, 229, 255, 0.07);
+      }
+
+      .register-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: 0.82rem;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      input,
+      select,
+      textarea {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        padding: 13px 16px;
+        font-size: 0.95rem;
+        font-family: "DM Sans", sans-serif;
+        outline: none;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s;
+        width: 100%;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+      }
+      select option {
+        background: var(--surface);
+      }
+
+      .selected-skill-display {
+        background: rgba(0, 229, 255, 0.06);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        color: var(--accent);
+        font-weight: 500;
+        grid-column: 1 / -1;
+      }
+
+      .submit-btn {
+        grid-column: 1 / -1;
+        padding: 15px;
+        border-radius: 8px;
+        border: none;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: var(--bg);
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: "Syne", sans-serif;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition:
+          transform 0.2s,
+          box-shadow 0.3s;
+      }
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 229, 255, 0.35);
+      }
+
+      /* Success */
+      .success-msg {
+        display: none;
+        text-align: center;
+        padding: 2.5rem;
+        background: rgba(0, 255, 157, 0.05);
+        border: 1px solid rgba(0, 255, 157, 0.2);
+        border-radius: 14px;
+      }
+      .success-msg .check {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      .success-msg h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--accent2);
+      }
+      .success-msg p {
+        color: var(--muted);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        position: relative;
+        z-index: 1;
+        padding: 50px 5% 30px;
+        border-top: 1px solid var(--border);
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+      .footer-brand {
+        max-width: 280px;
+      }
+      .footer-brand p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        line-height: 1.7;
+      }
+      .footer-links h5 {
+        font-family: "Syne", sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+      .footer-links ul {
+        list-style: none;
+      }
+      .footer-links li {
+        margin-bottom: 0.6rem;
+      }
+      .footer-links a {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .socials {
+        display: flex;
+        gap: 1rem;
+      }
+      .socials a {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: 0.25s;
+      }
+      .socials a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeSlide {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background: var(--surface);
+          padding: 1.5rem 5%;
+          border-bottom: 1px solid var(--border);
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .register-form {
+          grid-template-columns: 1fr;
+        }
+        .form-group.full {
+          grid-column: 1;
+        }
+        .submit-btn {
+          grid-column: 1;
+        }
+        .selected-skill-display {
+          grid-column: 1;
+        }
+        .stats-bar {
+          flex-direction: column;
+        }
+        .stat-item {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .stat-item:last-child {
+          border-bottom: none;
+        }
+        .footer-top {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <text
+              x="2"
+              y="26"
+              font-family="sans-serif"
+              font-weight="900"
+              font-size="22"
+              fill="white"
+            >
+              S
+            </text>
+            <polyline
+              points="20,28 28,10 36,28"
+              stroke="white"
+              stroke-width="3.5"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <line
+              x1="34"
+              y1="8"
+              x2="36"
+              y2="8"
+              stroke="white"
+              stroke-width="1"
+            />
+            <polygon points="36,4 29,11 36,14" fill="white" />
+          </svg>
+        </div>
+        <span class="logo-text">SKILL<span>VAULT</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#skills">Courses</a></li>
+        <li><a href="#how">How it Works</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#register" class="nav-cta">Enroll Now</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">Africa's Premier Tech Skill Hub</div>
+      <h1>
+        <span>Unlock Your</span><br />
+        <span class="line2">Tech Future.</span><br />
+        <span class="line3">Build Africa.</span>
+      </h1>
+      <p>
+        From code to no-code, master the most in-demand digital skills driving
+        Africa's tech revolution. Learn online, earn certificates, land
+        opportunities.
+      </p>
+      <div class="hero-buttons">
+        <a href="#skills" class="btn-primary">Explore Courses</a>
+        <a href="#register" class="btn-outline">Register Free →</a>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <div class="stat-num">12,000+</div>
+        <div class="stat-label">Students Enrolled</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Tech Tracks</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">94%</div>
+        <div class="stat-label">Employment Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">African Countries</div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="skills-header reveal">
+        <div>
+          <div class="section-tag">Our Courses</div>
+          <h2 class="section-title">Top Tech Skills<br />for Africa</h2>
+        </div>
+        <p class="section-sub">
+          Carefully curated programs aligned with African market demand and
+          global tech standards.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Card 1 -->
+        <div
+          class="skill-card reveal"
+          data-color="cyan"
+          data-skill="Web Development"
+        >
+          <div class="skill-icon">💻</div>
+          <span class="skill-badge badge-code">Code</span>
+          <h3>Web Development</h3>
+          <p>
+            Master HTML, CSS, JavaScript and modern frameworks like React and
+            Next.js. Build real-world projects for African startups and global
+            clients.
+          </p>
+          <div class="skill-meta">
+            <span>⏱ 16 Weeks</span>
+            <span>📶 Beginner – Pro</span>
+            <span>🎓 Certificate</span>
+          </div>
+          <button class="skill-enroll" onclick="selectSkill('Web Development')">
+            Enroll Now
+          </button>
+        </div>
+
+        <!-- Card 2 -->
+        <div
+          class="skill-card reveal"
+          data-color="purple"
+          data-skill="Data Science & AI"
+        >
+          <div class="skill-icon">🤖</div>
+          <span class="skill-badge badge-code">Code</span>
+          <h3>Data Science & AI</h3>
+          <p>
+            Learn Python, machine learning, and data analysis. Use AI tools
+            solving real African challenges in agriculture, health, and finance.
+          </p>
+          <div class="skill-meta">
+            <span>⏱ 20 Weeks</span>
+            <span>📶 Intermediate</span>
+            <span>🎓 Certificate</span>
+          </div>
+          <button
+            class="skill-enroll"
+            onclick="selectSkill('Data Science & AI')"
+          >
+            Enroll Now
+          </button>
+        </div>
+
+        <!-- Card 3 -->
+        <div
+          class="skill-card reveal"
+          data-color="green"
+          data-skill="Digital Marketing"
+        >
+          <div class="skill-icon">📈</div>
+          <span class="skill-badge badge-nocode">No-Code</span>
+          <h3>Digital Marketing</h3>
+          <p>
+            Social media strategy, SEO, paid ads, and content marketing. Grow
+            businesses and brands across Africa's booming digital economy.
+          </p>
+          <div class="skill-meta">
+            <span>⏱ 10 Weeks</span>
+            <span>📶 Beginner</span>
+            <span>🎓 Certificate</span>
+          </div>
+          <button
+            class="skill-enroll"
+            onclick="selectSkill('Digital Marketing')"
+          >
+            Enroll Now
+          </button>
+        </div>
+
+        <!-- Card 4 -->
+        <div
+          class="skill-card reveal"
+          data-color="orange"
+          data-skill="UI/UX Design"
+        >
+          <div class="skill-icon">🎨</div>
+          <span class="skill-badge badge-nocode">No-Code</span>
+          <h3>UI/UX Design</h3>
+          <p>
+            Design beautiful, user-centred products using Figma. Learn design
+            thinking, prototyping, and user research for African and global
+            audiences.
+          </p>
+          <div class="skill-meta">
+            <span>⏱ 12 Weeks</span>
+            <span>📶 Beginner</span>
+            <span>🎓 Certificate</span>
+          </div>
+          <button class="skill-enroll" onclick="selectSkill('UI/UX Design')">
+            Enroll Now
+          </button>
+        </div>
+
+        <!-- Card 5 -->
+        <div
+          class="skill-card reveal"
+          data-color="pink"
+          data-skill="Cybersecurity"
+        >
+          <div class="skill-icon">🔐</div>
+          <span class="skill-badge badge-code">Code</span>
+          <h3>Cybersecurity</h3>
+          <p>
+            Protect systems, networks, and data. Learn ethical hacking, threat
+            analysis, and security frameworks critical for Africa's growing
+            digital infrastructure.
+          </p>
+          <div class="skill-meta">
+            <span>⏱ 18 Weeks</span>
+            <span>📶 Intermediate</span>
+            <span>🎓 Certificate</span>
+          </div>
+          <button class="skill-enroll" onclick="selectSkill('Cybersecurity')">
+            Enroll Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <div class="reveal">
+        <div class="section-tag">The Process</div>
+        <h2 class="section-title">How SkillVault Works</h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-step reveal">
+          <div class="step-num">01</div>
+          <h4>Choose a Skill</h4>
+          <p>
+            Browse our 5 in-demand tech tracks and pick the one that fits your
+            goals and background.
+          </p>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">02</div>
+          <h4>Register & Pay</h4>
+          <p>
+            Fill the registration form. We offer flexible payment plans
+            including mobile money.
+          </p>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">03</div>
+          <h4>Learn Online</h4>
+          <p>
+            Access live sessions, recorded videos, and project tasks from
+            anywhere in Africa.
+          </p>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">04</div>
+          <h4>Get Certified</h4>
+          <p>
+            Complete your program, pass assessments, and receive a globally
+            recognised certificate.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="register">
+      <div class="register-inner">
+        <div class="form-title-row reveal">
+          <div class="section-tag">Start Today</div>
+          <h2 class="section-title">Register for a Course</h2>
+          <p
+            class="section-sub"
+            style="margin: 0.5rem auto 0; text-align: center"
+          >
+            Select your preferred tech skill below and fill in your details.
+          </p>
+        </div>
+
+        <!-- Skill Tabs -->
+        <div class="skill-tabs reveal">
+          <button
+            class="skill-tab active"
+            onclick="selectTab(this, 'Web Development')"
+          >
+            Web Dev
+          </button>
+          <button
+            class="skill-tab"
+            onclick="selectTab(this, 'Data Science & AI')"
+          >
+            Data & AI
+          </button>
+          <button
+            class="skill-tab"
+            onclick="selectTab(this, 'Digital Marketing')"
+          >
+            Marketing
+          </button>
+          <button class="skill-tab" onclick="selectTab(this, 'UI/UX Design')">
+            UI/UX
+          </button>
+          <button class="skill-tab" onclick="selectTab(this, 'Cybersecurity')">
+            Cybersecurity
+          </button>
+        </div>
+
+        <form
+          class="register-form reveal"
+          id="registerForm"
+          action="/submit"
+          method="post"
+        >
+          <div
+            class="selected-skill-display"
+            id="selectedSkillDisplay"
+            name="course"
+          >
+            📚 Selected Course: <strong>Web Development</strong>
+          </div>
+          <input
+            type="hidden"
+            id="selectedSkill"
+            value="Web Development"
+            name="course"
+          />
+
+          <div class="form-group">
+            <label> first Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Kofi"
+              required
+              name="firstName"
+            />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Mensah"
+              required
+              name="lastName"
+            />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              required
+              name="email"
+            />
+          </div>
+          <div class="form-group">
+            <label>Phone (WhatsApp)</label>
+            <input
+              type="tel"
+              placeholder="+234 800 000 0000"
+              required
+              name="phone"
+            />
+          </div>
+          <div class="form-group">
+            <label>Country</label>
+            <select name="country" required>
+              <option value="">Select your country</option>
+              <option>Nigeria</option>
+              <option>Ghana</option>
+              <option>Kenya</option>
+              <option>South Africa</option>
+              <option>Ethiopia</option>
+              <option>Tanzania</option>
+              <option>Uganda</option>
+              <option>Rwanda</option>
+              <option>Cameroon</option>
+              <option>Senegal</option>
+              <option>Côte d'Ivoire</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <
+          <div class="form-group">
+            <label>Experience Level</label>
+            <select name="experienceLevel" required>
+              <option value="">Your current level</option>
+              <option>Complete Beginner</option>
+              <option>Some Knowledge</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Why do you want to learn this skill?</label>
+            <textarea
+              rows="4"
+              placeholder="Tell us your motivation..."
+              name="motivation"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            🚀 Complete Registration
+          </button>
+        </form>
+
+        <div class="success-msg" id="successMsg">
+          <div class="check">✅</div>
+          <h3>Registration Successful!</h3>
+          <p>
+            Welcome to SkillVault! Check your email for onboarding details and
+            next steps.<br />Your tech journey starts now.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon">
+              <svg
+                viewBox="0 0 40 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <text
+                  x="2"
+                  y="26"
+                  font-family="sans-serif"
+                  font-weight="900"
+                  font-size="22"
+                  fill="white"
+                >
+                  S
+                </text>
+                <polyline
+                  points="20,28 28,10 36,28"
+                  stroke="white"
+                  stroke-width="3.5"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <polygon points="36,4 29,11 36,14" fill="white" />
+              </svg>
+            </div>
+            <span class="logo-text">SKILL<span>VAULT</span></span>
+          </div>
+          <p>
+            Empowering Africa's next generation of tech professionals. From
+            Lagos to Nairobi, we vault your skills.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h5>Courses</h5>
+          <ul>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Data Science & AI</a></li>
+            <li><a href="#">Digital Marketing</a></li>
+            <li><a href="#">UI/UX Design</a></li>
+            <li><a href="#">Cybersecurity</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Instructors</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Support</h5>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 SkillVault. All rights reserved.</span>
+        <div class="socials">
+          <a href="#" title="Twitter">𝕏</a>
+          <a href="#" title="LinkedIn">in</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="WhatsApp">w</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Hamburger
+      document.getElementById("hamburger").addEventListener("click", () => {
+        document.getElementById("navLinks").classList.toggle("open");
+      });
+
+      // Scroll reveal
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("visible"), i * 80);
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      reveals.forEach((el) => observer.observe(el));
+
+      // Select skill from tab
+      function selectTab(btn, skill) {
+        document
+          .querySelectorAll(".skill-tab")
+          .forEach((t) => t.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("selectedSkill").value = skill;
+        document.getElementById("selectedSkillDisplay").innerHTML =
+          `📚 Selected Course: <strong>${skill}</strong>`;
+      }
+
+      // Select skill from card button
+      function selectSkill(skill) {
+        document.getElementById("selectedSkill").value = skill;
+        document.getElementById("selectedSkillDisplay").innerHTML =
+          `📚 Selected Course: <strong>${skill}</strong>`;
+
+        // Update tabs
+        document.querySelectorAll(".skill-tab").forEach((tab) => {
+          tab.classList.remove("active");
+          if (
+            tab.textContent
+              .trim()
+              .toLowerCase()
+              .includes(skill.split(" ")[0].toLowerCase())
+          ) {
+            tab.classList.add("active");
+          }
+        });
+
+        document
+          .getElementById("register")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Form submit
+      function handleSubmit(e) {
+        e.preventDefault();
+        document.getElementById("registerForm").style.display = "none";
+        const msg = document.getElementById("successMsg");
+        msg.style.display = "block";
+        msg.scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>
