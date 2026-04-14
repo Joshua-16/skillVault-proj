@@ -13,7 +13,6 @@ app.use(express.json())
 app.use(express.static('public')); // Serves your HTML file
 
 // 1. MongoDB Connection
-// Replace 'skillvault' with your database name
 mongoose.connect('mongodb+srv://joshuakolawole:joshua1234@cluster0.zibsx.mongodb.net/skillvault')
     .then(() => console.log('Connected to MongoDB Successfully'))
     .catch(err => console.error('Could not connect to MongoDB', err));
